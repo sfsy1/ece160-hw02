@@ -6,17 +6,17 @@ Prints the sizes and possible ranges of four integer data types.
 */
 void print_int_ranges() {
   // TODO fill in missing values!
-  int short_bytes = 0;
-  int int_bytes = 0;
-  int uint_bytes = 0;
+  int short_bytes = sizeof(short);
+  int int_bytes = sizeof(int);
+  int uint_bytes = sizeof(unsigned int);
   int long_bytes = sizeof(long);
 
-  short short_min = 0;
-  short short_max = 0;
-  int int_min = 0;
-  int int_max = 0;
+  short short_min = 1 << short_bytes * 8 - 1;
+  short short_max = ~short_min;
+  int int_min = 1 << int_bytes * 8 - 1;
+  int int_max = ~int_min;
   unsigned int uint_min = 0;
-  unsigned int uint_max = 0;
+  unsigned int uint_max = ~0;
   long long_min = 1L << long_bytes * 8 - 1;
   long long_max = ~long_min;
 
@@ -41,12 +41,18 @@ int is_bit_set(unsigned char v, unsigned char i) {
     fprintf(stderr, "Index out of range!\n");
     return 0;
   }
-
-  /*
-  TODO your implementation goes here!
-  */
-
-  return 0;
+  
+  int somenumber = 1 << i;
+  
+  int someresult = somenumber & v;
+  
+  switch(someresult){
+    case 0:
+      return 0;
+      break;
+	default:
+	  return 1;
+  }
 }
 
 /*
